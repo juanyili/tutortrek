@@ -1,0 +1,33 @@
+.important {
+   color: teal;
+   font-weight: bold;
+}
+
+h1{
+  font-size: xx-large;  /* banner header is huge */
+  color: #191970;
+  font-weight: bold;
+  text-align: center;
+}
+h2{
+    font-size: x-large;  /* banner header is huge */
+    color: #191970;
+    font-weight: bold;
+    text-align: center;
+}
+
+legend {
+	color: maroon;
+  font-size: large;
+}
+
+
+body {
+  background-color: #99ccff;
+}
+
+#container{
+  margin: 70px;
+  background-color: #FFF0F5;
+  padding: 30px;
+}
