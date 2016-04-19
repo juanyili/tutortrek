@@ -8,7 +8,7 @@ import os
 import cgi
 import cgitb; cgitb.enable()
 import cgi_utils_sda
-import tutortrek
+#import tutortrek_admin
 
 def main():
   fillers = {}

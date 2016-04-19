@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC>
+<HTML lang="en">
+<head>
+    <title>TutorTrek Tutor page</title>
+    <meta name=author content="Wanyi Li">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<div id="container">
+<body>
+<h1>TutorTrek</h1>
+<h2>Innovative Tutoring Service Tracking System Brought To You By The Brilliant Emma Flower and Wanyi Giraffe</h2>
+<h3>Main Page</h3>
+
+<p>If you are a tutor, please log your work session through this portal. This enters data into the MySQL
+  database called <strong>wli2_db</strong>. </p>
+
+<form method=post action="tutortrek_main.cgi">
+
+  <fieldset>
+    <legend>Log In</legend>
+    <table>
+      <tr><td><label for="uid" accesskey="i">(i) User ID:</label></td><td><input type="text" name="uid" id="uid"></td></tr>
+      <tr><td><label for="choice" accesskey="c">(c) Choice:</label></td><td><select name ="choice" id = "choice"><option value="Admin">Admin</option><option value="Tutor">Tutor</option><option value="Tutee">Tutee</option></select></td></tr>
+    </table>
+  </fieldset>
+
+  <p>
+    <input type='reset' value='reset'>
+    <input type='button' value='new form' onClick="window.location='tutortrek_main.cgi'">
+    <input type='submit' name='submit' value='Log In'>
+</p>
+</form>
+</body>
+
+</div>
+</html>

@@ -10,10 +10,16 @@ h1{
   text-align: center;
 }
 h2{
-    font-size: x-large;  /* banner header is huge */
+    font-size: large;  /* banner header is huge */
     color: #191970;
     font-weight: bold;
     text-align: center;
+}
+
+h3{
+    font-size: x-large;  /* banner header is huge */
+    color: #191970;
+    font-weight: bold;
 }
 
 legend {

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC>
+<HTML lang="en">
+<head>
+    <title>TutorTrek Tutor page</title>
+    <meta name=author content="Wanyi Li">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<div id="container">
+<body>
+<h1>TutorTrek</h1>
+<h2>Innovative Tutoring Service Tracking System Brought To You By The Brilliant Emma Flower and Wanyi Giraffe</h2>
+
+<h3>Admin Page</h3>
+
+<p>If you are an administrator, please store information and search information through this portal. This enters data into the MySQL database called <strong>wli2_db</strong>. </p>
+
+<form method=post action="tutortrek_admin.cgi">
+  <fieldset>
+    <legend>Add a tutor</legend>
+    <table>
+    <tr><th>&nbsp;</th><th>Tutor ID</th><th>Class ID</th></tr>
+    <tr><td>0</td><td><input type='text' name='tid0'></td><td><input type='text' name='cid0'></td></tr>
+    <tr><td>1</td><td><input type='text' name='tid1'></td><td><input type='text' name='cid1'></td></tr>
+    <tr><td>2</td><td><input type='text' name='tid2'></td><td><input type='text' name='cid2'></td></tr>
+    </table>
+    <input type='submit' name='submit' value='Submit'>
+  </fieldset> 
+
+  <fieldset>
+    <legend>Look up a tutor</legend>
+    Tutor ID: <input type='text' name='tutor_id'>
+  	<input type='submit' name='submit' value='Lookup'>
+  </fieldset>
+
+  <fieldset>
+    <legend>Look up a class</legend>
+    Class ID: <input type='text' name='class_id'>
+  	<input type='submit' name='submit' value='Lookup'>
+  </fieldset>
+
+  <p>
+    <input type='reset' value='reset'>
+    <input type='button' value='new form' onClick="window.location='tutortrek_admin.cgi'">
+    <input type='submit' name='submit' value='Submit'>
+</form>
+</body>
+
+</div>
+</html>
