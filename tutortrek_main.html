@@ -18,17 +18,27 @@
 <form method=post action="tutortrek_main.cgi">
 
   <fieldset>
+    <legend>Register</legend>
+    Name: <input type='text' name='name'>
+    Username: <input type='text' name='username'>
+    <p>
+      <input type='submit' name='submit' value='Register'>
+  </fieldset>
+
+  <fieldset>
     <legend>Log In</legend>
     <table>
       <tr><td><label for="uid" accesskey="i">(i) User ID:</label></td><td><input type="text" name="uid" id="uid"></td></tr>
       <tr><td><label for="choice" accesskey="c">(c) Choice:</label></td><td><select name ="choice" id = "choice"><option value="Admin">Admin</option><option value="Tutor">Tutor</option><option value="Tutee">Tutee</option></select></td></tr>
     </table>
+    <p>
+    <input type='submit' name='submit' value='Log In'>
   </fieldset>
 
   <p>
     <input type='reset' value='reset'>
     <input type='button' value='new form' onClick="window.location='tutortrek_main.cgi'">
-    <input type='submit' name='submit' value='Log In'>
+    
 </p>
 </form>
 </body>

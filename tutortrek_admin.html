@@ -19,30 +19,29 @@
   <fieldset>
     <legend>Add a tutor</legend>
     <table>
-    <tr><th>&nbsp;</th><th>Tutor ID</th><th>Class ID</th></tr>
-    <tr><td>0</td><td><input type='text' name='tid0'></td><td><input type='text' name='cid0'></td></tr>
-    <tr><td>1</td><td><input type='text' name='tid1'></td><td><input type='text' name='cid1'></td></tr>
-    <tr><td>2</td><td><input type='text' name='tid2'></td><td><input type='text' name='cid2'></td></tr>
+    <tr><th>&nbsp;</th><th>Tutor ID</th><th>Class ID</th><th>Class Name</th></tr>
+    <tr><td>0</td><td><input type='text' name='tid0'></td><td><input type='text' name='cid0'></td><td><input type='text' name='cname0'></td></tr>
+    <tr><td>1</td><td><input type='text' name='tid1'></td><td><input type='text' name='cid1'></td><td><input type='text' name='cname1'></td></tr>
+    <tr><td>2</td><td><input type='text' name='tid2'></td><td><input type='text' name='cid2'></td><td><input type='text' name='cname2'></td></tr>
     </table>
-    <input type='submit' name='submit' value='Submit'>
+    <input type='submit' name='submit' value='StoreInfo'>
   </fieldset> 
 
   <fieldset>
     <legend>Look up a tutor</legend>
     Tutor ID: <input type='text' name='tutor_id'>
-  	<input type='submit' name='submit' value='Lookup'>
+  	<input type='submit' name='submit' value='LookupTutor'>
   </fieldset>
 
   <fieldset>
     <legend>Look up a class</legend>
     Class ID: <input type='text' name='class_id'>
-  	<input type='submit' name='submit' value='Lookup'>
+  	<input type='submit' name='submit' value='LookupClass'>
   </fieldset>
 
   <p>
     <input type='reset' value='reset'>
     <input type='button' value='new form' onClick="window.location='tutortrek_admin.cgi'">
-    <input type='submit' name='submit' value='Submit'>
 </form>
 </body>
 

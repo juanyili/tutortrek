@@ -18,7 +18,7 @@ def addSession(conn, fillers, work_list):
 		curs.execute('insert into person (nm, name, birthdate, addedby) values (%s,%s,%s, 1202);', actor_data)
 		print "<p>Message: Actor %s is sucessfully added. </p>" %(fillers['actorname'],)
 
-	for i in range(len(movie_list)):
+	for i in range(len(work_list)):
 		if work_list[i] == True:
 			cid = 'cid'+str(i)
 			date = 'date'+str(i)
