@@ -18,22 +18,19 @@ def main():
   if fs['submit'].value == 'Register':
     fillers['name'] = cgi.escape(fs["name"].value)
     fillers['username'] = cgi.escape(fs["username"].value)
-    tutortrek_main.main(fillers)
-    page = cgi_utils_sda.file_contents('tutortrek_main.html')
+    message = tutortrek_main.main(fillers)
+    fillers['No messages'] = message
+    tmpl = cgi_utils_sda.file_contents('tutortrek_main.html')
+    page = tmpl.format(**fillers)
 
   else:
-    if "uid" not in fs or "choice" not in fs: 
-      print "Message: Please fill in the following fields if you want to log in."
-      page = cgi_utils_sda.file_contents('tutortrek_main.html')
-    else:
-      fillers['uid'] = cgi.escape(fs["uid"].value)
-      fillers['choice'] = cgi.escape(fs["choice"].value)
-      if fillers['choice'] == "Tutor":
-        page = cgi_utils_sda.file_contents('tutortrek_tutor.html')
-      if fillers['choice'] == "Admin":
-        page = cgi_utils_sda.file_contents('tutortrek_admin.html')
-      if fillers['choice'] == "Tutee":
-        page = cgi_utils_sda.file_contents('tutortrek_tutee.html')
+    fillers['choice'] = cgi.escape(fs["choice"].value)
+    if fillers['choice'] == "Tutor":
+      page = cgi_utils_sda.file_contents('tutortrek_tutor.html')
+    if fillers['choice'] == "Admin":
+      page = cgi_utils_sda.file_contents('tutortrek_admin.html')
+    if fillers['choice'] == "Tutee":
+      page = cgi_utils_sda.file_contents('tutortrek_tutee.html')
 
   return page
 

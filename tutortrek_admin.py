@@ -35,18 +35,18 @@ def searchTutor(conn, fillers):
 	curs.execute("SELECT uid, name, role from people where uid = %s;", (tid,))
 	row = curs.fetchone()
 	if row == None:
-		message = 'This person is not in the database.'
+		message = '<p>This person is not in the database.'
 	elif '{role}'.format(**row) !='Tutor':
 		message = 'Student with ID {uid} is called {name}. Please add them as a tutor first.'.format(**row)
 	else:
-		message = 'This tutor is {name}.\n'.format(**row)
+		message = '<p>This tutor is {name}.\n'.format(**row)
 		curs.execute("SELECT sid, cid, session_date, length from session where tutor_id = %s;", (tid,))
 		row = curs.fetchone()
 		while row != None:
-			message += '<li>session {sid} for class {cid} was on {session_date} for {length} hours'.format(**row)
+			message += '<li>session {sid} for class {cid} was on {session_date} for {length} hours.'.format(**row)
 			row = curs.fetchone()
 		else:
-			message+='\nThere are no more sessions.'
+			message+='<p>There are no more sessions.'
 	#print message
 	return message
 
@@ -60,12 +60,12 @@ def searchClass(conn, fillers):
 		curs.execute("SELECT sid, cid, session_date, length from session where cid = %s;", (cid,))
 		row = curs.fetchone()
 		while row!=None:
-			message += '<li>session {sid} for class {cid} was on {session_date} for {length} hours'.format(**row)
+			message += '<li>session {sid} for class {cid} was on {session_date} for {length} hours.'.format(**row)
 			row = curs.fetchone()
 		else:
-			message += '\nThere are no more sessions'
+			message += '<p>There are no more sessions.'
 	else:
-		message = 'The class you are looking for does not exist. Please check again!'
+		message = '<p>The class you are looking for does not exist. Please check again!'
 	#print message
 	return message
 

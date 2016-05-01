@@ -25,21 +25,25 @@
 <form method=post action="tutortrek_tutor.cgi">
 
   <fieldset>
-    <legend>Tutor's Personal Data</legend>
+    <legend>Log In As A Tutor</legend>
     <table>
-      <tr><td><label for="uid" accesskey="i">(i) Tutor's ID:</label></td><td><input type="text" name="uid" id="uid"></td></tr>
-      <tr><td><label for="name" accesskey="n">(n) Tutor Name:</label></td><td><input type="text" name="name" id="name"></td></tr>
+      <tr><td><label for="uid">Tutor's ID:</label></td><td><input type="text" name="uid" id="uid"></td></tr>
+      <tr><td><label for="name">Tutor Name:</label></td><td><input type="text" name="name" id="name"></td></tr>
     </table>
+    <p><input type='submit' name='submit' value='Log In'>
   </fieldset>
 
   <fieldset>
     <legend>Tutor's Work Info</legend>
     <table>
-    <tr><th>&nbsp;</th><th>Class ID</th><th>Date</th><th>Starting Time</th><th>Duration</th></tr>
+    <tr><th>&nbsp;</th><th>Class ID</th><th>Date</th><th>Starting Time (24hr format)</th><th>Duration (hr)</th></tr>
+    <tr><td>Example: </td><td>101</td><td>2016-04-01</td><td>17</td><td>1</td></tr>
     <tr><td>0</td><td><input type='text' name='cid0'></td><td><input type='text' name='date0'></td><td><input type='text' name='time0'></td><td><input type='text' name='duration0'></td></tr>
     <tr><td>1</td><td><input type='text' name='cid1'></td><td><input type='text' name='date1'></td><td><input type='text' name='time1'></td><td><input type='text' name='duration1'></td></tr>
     <tr><td>2</td><td><input type='text' name='cid2'></td><td><input type='text' name='date2'></td><td><input type='text' name='time2'></td><td><input type='text' name='duration2'></td></tr>
     </table>
+    <p>
+      <input type='submit' name='submit' value='Log Work Data'>
   </fieldset> 
 
   <fieldset>

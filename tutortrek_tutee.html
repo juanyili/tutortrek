@@ -26,21 +26,26 @@
 <form method=post action="tutortrek_tutee.cgi">
 
   <fieldset>
-    <legend>Tutee's Personal Data</legend>
+    <legend>Log In As A Tutee</legend>
     <table>
-      <tr><td><label for="uid" accesskey="i">(i) Tutee's ID:</label></td><td><input type="text" name="uid" id="uid"></td></tr>
-      <tr><td><label for="name" accesskey="n">(n) Tutee Name:</label></td><td><input type="text" name="name" id="name"></td></tr>
+      <tr><td><label for="uid">Tutee's ID:</label></td><td><input type="text" name="uid" id="uid"></td></tr>
+      <tr><td><label for="name">Tutee Name:</label></td><td><input type="text" name="name" id="name"></td></tr>
     </table>
+    <p>
+    <input type='submit' name='submit' value='Log In'>
   </fieldset>
 
   <fieldset>
     <legend>Tutee's Attendance Info</legend>
     <table>
-    <tr><th>&nbsp;</th><th>Class ID</th><th>Date</th><th>Starting Time</th><th>Tutor</th><th>Rating</th></tr>
-    <tr><td>0</td><td><input type='text' name='cid0'></td><td><input type='text' name='date0'></td><td><input type='text' name='time0'></td><td><input type='text' name='tutor0'></td><td><input type='text' name='rating0'></td></tr>
-    <tr><td>1</td><td><input type='text' name='cid1'></td><td><input type='text' name='date1'></td><td><input type='text' name='time1'></td><td><input type='text' name='tutor1'></td><td><input type='text' name='rating1'></td></tr>
-    <tr><td>2</td><td><input type='text' name='cid2'></td><td><input type='text' name='date2'></td><td><input type='text' name='time2'></td><td><input type='text' name='tutor2'></td><td><input type='text' name='rating2'></td></tr>
+    <tr><th>&nbsp;</th><th>Class ID</th><th>Date</th><th>Starting Time (24hr format)</th><th>Tutor</th><th>Rating</th></tr>
+    <tr><td>Example: </td><td>101</td><td>2016-01-01</td><td>17</td><td>Emma Howey</td><td>3</td></tr>
+    <tr><td>0</td><td><input type='text' name='cid0'></td><td><input type='text' name='date0'></td><td><input type='text' name='time0'></td><td><input type='text' name='tutor0'></td><td><select name ="rating0"><option value="3">Great!</option><option value="2">Okay</option><option value="1">Bad</option></select></td></tr>
+    <tr><td>1</td><td><input type='text' name='cid1'></td><td><input type='text' name='date1'></td><td><input type='text' name='time1'></td><td><input type='text' name='tutor1'></td><td><select name ="rating0"><option value="3">Great!</option><option value="2">Okay</option><option value="1">Bad</option></select></td></tr>
+    <tr><td>2</td><td><input type='text' name='cid2'></td><td><input type='text' name='date2'></td><td><input type='text' name='time2'></td><td><input type='text' name='tutor2'></td><td><select name ="rating0"><option value="3">Great!</option><option value="2">Okay</option><option value="1">Bad</option></select></td></tr>
     </table>
+    <p>
+    <input type='submit' name='submit' value='Log Attendance Data'>
   </fieldset>
 
   <fieldset>
@@ -51,7 +56,6 @@
   <p>
     <input type='reset' value='reset'>
     <input type='button' value='new form' onClick="window.location='tutortrek_tutee.cgi'">
-    <input type='submit' name='submit' value='Log Attendance Data'>
 </form>
 </body>
 

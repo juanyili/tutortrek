@@ -14,8 +14,9 @@ def register(conn, fillers):
 	curs.execute("insert into people (name, username, role) values (%s, %s, 'Tutee');", data)
 	curs.execute("select uid from people where username = %s;", (fillers['username']))
 	row = curs.fetchone()
-	print "<p>Message: Your info is registered. Your role is currently a tutee. If you are a tutor, please contact admin to add you. Your ID is ", row
-
+	message =  "<p>Message: Your info is registered. Your role is currently a tutee. If you are a tutor, please contact admin to add you. Your ID is ", row
+	return message
+	
 def main(fillers):
 	dsn = wendy_dsn.DSN
 	dsn['database'] = 'wli2_db'
