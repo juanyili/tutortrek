@@ -31,11 +31,10 @@ def main():
     fillers['tutor_id'] = cgi.escape(fs['tutor_id'].value)
   if 'class_id' in fs:
     fillers['class_id'] = cgi.escape(fs['class_id'].value)
-
-
-  tutortrek_admin.main(submit, fillers, tutor_list)
-  page = cgi_utils_sda.file_contents('tutortrek_admin.html')
-  #page = tmpl.format(**fillers)
+  message = tutortrek_admin.main(submit, fillers, tutor_list)
+  fillers['No messages'] = message
+  tmpl = cgi_utils_sda.file_contents('tutortrek_admin.html')
+  page = tmpl.format(**fillers)
   return page
 
 if __name__ == '__main__':

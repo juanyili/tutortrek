@@ -16,45 +16,32 @@ create table people (
 	username varchar(20),
     password char(15),
     primary key (uid),
-    unique(username)
-    );
-
-create table admin(
-    admin_id int,
-    foreign key (admin_id) references people.uid
-    );
-
-create table tutee(
-    tutee_id int,
-    foreign key (tutee_id) references people.uid
-    );
-
-create table tutor(
-    tutor_id int,
-    foreign key (tutor_id) references people.uid
+    unique(username),
+    role enum ('Admin', 'Tutor', 'Tutee')
     );
 
 create table class(
-    class_id int,
+    cid int,
     title  varchar(50),
-    primary key (class_id)
+    primary key (cid)
     );
 
 create table session(
     sid int auto_increment primary key,
-    class_id int,
+    cid int,
     session_date date,
-    length int,
+    length FLOAT,
     tutor_id int,
-    foreign key (class_id) references class.class_id,
-    foreign key (tutor_id) references tutor.tutor_id
+    attendance int,
+    foreign key (cid) references class.class_id,
+    foreign key (tutor_id) references people.uid
     );
 
 create table ratings(
     tutee_id int,
     sid int,
-    rating_score enum ('Yes, I recommend', "No, I don't", 'I am neutral.'),
+    rating_score enum ('1', '2', '3'),
     primary key (tutee_id, sid),
     foreign key (sid) references session.sid,
-    foreign key (tutee_id) references tutee.tutee_id
+    foreign key (tutee_id) references people.uid
     );

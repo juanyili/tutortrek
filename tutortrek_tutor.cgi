@@ -13,7 +13,7 @@ import tutortrek_tutor
 def main():
   fillers = {}
   fillers['scriptname'] = os.environ['SCRIPT_NAME'] if 'SCRIPT_NAME' in os.environ else ''
-
+  fillers['Message'] = 'You have no new message right now'
   fs = cgi.FieldStorage()
   work_list = [False, False, False] # keep track of how many work sessions are entered
   if "uid" not in fs or "name" not in fs: 
@@ -33,8 +33,9 @@ def main():
           fillers[date] = cgi.escape(fs[date].value)
           fillers[time] = cgi.escape(fs[time].value)
           fillers[duration] = cgi.escape(fs[duration].value)
-    tutortrek.main(fillers, work_list)
-  tmpl = cgi_utils_sda.file_contents('tutortrek.html')
+    message = tutortrek_tutor.main(fillers, work_list)
+    fillers['No messages'] = message
+  tmpl = cgi_utils_sda.file_contents('tutortrek_tutor.html')
   page = tmpl.format(**fillers)
   return page
 

@@ -1,6 +1,6 @@
 #!/usr/local/bin/python2.7
 
-# CS304 Assignment 5
+# CS304 Final project
 # Wanyi Li
 import cgi
 import cgitb; cgitb.enable()
@@ -10,36 +10,26 @@ import wendy_dsn
 
 def addSession(conn, fillers, work_list):
 	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
-	actor_data = (int(fillers['uid']),fillers['name'])
-	curs.execute('select * from tutor where tutor.uid = %s;',(int(fillers['uid']),))
-	if curs.fetchone() != None:
-		print "<p>Message: error: actor already in the database.</p>"
+	tutor_data = (int(fillers['uid']),fillers['name'])
+	curs.execute('SELECT uid, name, role FROM people WHERE people.uid = %s;',(int(fillers['uid']),))
+	row = curs.fetchone()
+	if row == None:
+		message = "<p>Message: error: your information is not registered yet.</p>"
+	elif '{role}'.format(**row) != 'Tutor':
+		message = "<p>Message: errow: you are not a tutor. Please contact admin to add you as a tutor."
 	else:
-		curs.execute('insert into person (nm, name, birthdate, addedby) values (%s,%s,%s, 1202);', actor_data)
-		print "<p>Message: Actor %s is sucessfully added. </p>" %(fillers['actorname'],)
+		for i in range(len(work_list)):
+			if work_list[i] == True:
+				cid = 'cid'+str(i)
+				date = 'date'+str(i)
+				#time = 'time'+str(i)
+				duration = 'duration'+str(i)
+				session_data = (int(fillers[cid]), fillers[date], float(fillers[duration]), int(fillers['uid']))			
+				curs.execute('INSERT INTO session (cid, session_date, length, tutor_id) values (%s, %s, %s, %s);', session_data)
+				message = "<p>Message: Your works sessions are stored in the database.</p>"
+	return message
 
-	for i in range(len(work_list)):
-		if work_list[i] == True:
-			cid = 'cid'+str(i)
-			date = 'date'+str(i)
-			time = 'time'+str(i)
-			duration = 'duration'+str(i)			
-		    curs.execute('select tt from movie where movie.title = %s;',(fillers[title],))
-			row = curs.fetchone()
-			if row == None: # if the movie already not yet exist in the movie table
-				if tt not in fillers or title not in fillers:
-					print "<p>Message: Movie %s doesn't exist in our database yet. Please fill out all information about this movie.</p>"%(fillers[title],)
-				else:
-					movie_data = (int(fillers[tt]), fillers[title], int(fillers[release]))
-					curs.execute('insert into movie (tt, title, `release`) values (%s, %s, %s);', movie_data)
-					print "<p>Message: Movie %s is sucessfully added.</p>" %(fillers[title],)
-			else:
-				fillers[tt] = row['tt']
-			curs.execute('insert into credit (nm, tt) values (%s,%s);', (int(fillers['actornm']),fillers[tt]))
-			print "<p>Message: The credential is inserted for movie %s.</p>" %(fillers[title],)
-
-
-def main(fillers, movie_list):
+def main(fillers, work_list):
 	dsn = wendy_dsn.DSN
 	dsn['database'] = 'wli2_db'
 	conn = dbconn.connect(dsn)

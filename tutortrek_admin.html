@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC>
 <HTML lang="en">
 <head>
-    <title>TutorTrek Tutor page</title>
+    <title>TutorTrek Admin page</title>
     <meta name=author content="Wanyi Li">
     <link rel="stylesheet" href="style.css">
 
@@ -10,6 +10,12 @@
 <body>
 <h1>TutorTrek</h1>
 <h2>Innovative Tutoring Service Tracking System Brought To You By The Brilliant Emma Flower and Wanyi Giraffe</h2>
+
+<nav>
+  <table id='menu'>
+   <tr><th><a href="tutortrek_main.html">Registration Page</a></th><th><a href="tutortrek_tutor.html">Tutor Page</a></th><th><a href="tutortrek_tutee.html">Tutee Page</a></th><th><a href="tutortrek_admin.html">Admin Page</a></th></tr>      
+   </table>
+</nav>
 
 <h3>Admin Page</h3>
 
@@ -37,6 +43,11 @@
     <legend>Look up a class</legend>
     Class ID: <input type='text' name='class_id'>
   	<input type='submit' name='submit' value='LookupClass'>
+  </fieldset>
+
+  <fieldset>
+    <legend>Message section</legend>
+    {No messages}
   </fieldset>
 
   <p>
