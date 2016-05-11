@@ -21,7 +21,7 @@ def register(fillers, password):
 def login(username, password, choice):
 	conn = connect()
 	curs = conn.cursor(MySQLdb.cursors.DictCursor)
-	curs.execute('SELECT password, role FROM people WHERE username = %s;',(username,))
+	curs.execute('SELECT name, password, role FROM people WHERE username = %s;',(username,))
 	row = curs.fetchone()
 	if row == None:
 		message = "<p>Message: error: your information is not registered yet.</p>"
@@ -29,15 +29,16 @@ def login(username, password, choice):
 	else:
 		if '{password}'.format(**row) == password:
 			role = '{role}'.format(**row)
+			name = '{name}'.format(**row)
 			if role == choice:
 				message = "<p>Message: Successfully logged in!</p>"
-				return [True, message, role]
+				return [True, message, role, name]
 			elif role == 'Tutor' and choice == 'Tutee': # this is a special case because tutors can log in as both a tutor or a tutee
 				message = "<p>Message: Successfully logged in! You are a tutor but you are going to the tutee page right now.</p>"
-				return [True, message, role]
+				return [True, message, role, name]
 			else:
 				message = "<p>Message: Sorry you do not have the authorization for the role you selected. Please contact administrator if you have another role.</p>"
-				return [False, message, role]
+				return [False, message, role, name]
 		else:
 			message = "<p>Message: The information you entered is not correct.</p>"
 			return [False, message, None]

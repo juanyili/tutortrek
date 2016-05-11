@@ -13,7 +13,7 @@
 
 <nav>
   <table id='menu'>
-   <tr><th><a href="tutortrek_main.html">Registration Page</a></th><th><a href="tutortrek_tutor.html">Tutor Page</a></th><th><a href="tutortrek_tutee.html">Tutee Page</a></th></tr>      
+   <tr><th><a href="tutortrek_main.html">Registration Page</a></th><th><a href="tutortrek_tutor.cgi">Tutor Page</a></th><th><a href="tutortrek_tutee.cgi">Tutee Page</a></th></tr>      
    </table>
 </nav>
 
@@ -23,21 +23,20 @@
   database called <strong>wli2_db</strong>. </p>
 
 <form method=post action="tutortrek_tutor.cgi">
+  <fieldset>
+    <legend>Message section</legend>
+    {No messages}
+  </fieldset> 
 
   <fieldset>
     <legend>Tutor's Work Info</legend>
     <table>
     <tr><th>&nbsp;</th><th>Class ID</th><th>Date</th><th>Starting Time (24hr format)</th><th>Duration (hr)</th></tr>
-    <tr><td>Example: </td><td>101</td><td>2016-04-01</td><td>17</td><td>1</td></tr>
-    <tr><td>Input:</td><td><input type='text' name='cid'></td><td><input type='text' name='date'></td><td><input type='text' name='time'></td><td><input type='text' name='duration'></td></tr>
+    <tr><td>Example: </td><td>Example:</td><td>2016-04-01</td><td>17</td><td>1</td></tr>
+    <tr><td>Input:</td><td>{class menu}</td><td><input type='date' name='date'></td><td><input type='time' name='time'></td><td><input type='text' name='duration'></td></tr>
     </table>
     <p>
       <input type='submit' name='submit' value='Log Work Data'>
-  </fieldset> 
-
-  <fieldset>
-    <legend>Message section</legend>
-    {No messages}
   </fieldset>   
 
   <p>

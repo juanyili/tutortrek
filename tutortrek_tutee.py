@@ -27,6 +27,80 @@ def addSession(fillers):
 			message = "<p>Message: Your attendance information is stored in the database.</p>"
 	return message
 
+
+def allClass(cid=None):
+	conn = connect()
+	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
+	menu = "<select name ='cid'><option selected disabled>Class title</option>"
+	if cid == None:
+		curs.execute('SELECT cid, title FROM class;')
+		row = curs.fetchone()
+		while row != None:
+			menu+="<option value={cid}>{title}</option>".format(**row)
+			row = curs.fetchone()
+	else:
+		curs.execute('SELECT cid, title FROM class;')
+		row = curs.fetchone()
+		while row != None:
+			if '{cid}'.format(**row) == cid:
+				menu+="<option selected value={cid}>{title}</option>".format(**row)
+			else:
+				menu+="<option value={cid}>{title}</option>".format(**row)
+			row = curs.fetchone()
+	menu+="</select>"
+	return menu
+
+def searchClass(search):
+	conn = connect()
+	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
+	menu= "<select name ='cid'><option selected disabled>Class title</option>"
+	curs.execute('SELECT cid, title FROM class where title like %s;', ('%'+search+'%',))
+	row = curs.fetchone()
+	if row == None:
+		menu = allClass()
+	else:
+		while row!= None:
+			menu+="<option value={cid}>{title}</option>".format(**row)
+			row = curs.fetchone()
+	menu += "</select>"
+	return menu
+
+
+def generateSession(cid, sid = None):
+	conn = connect()
+	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
+	menu = "<select name ='sid'>"
+	curs.execute('SELECT sid, session_date, tutor from session where cid = %s', (cid,))
+	row = curs.fetchone()
+	if row == None:
+		menu+='<option selected disabled>No sessions</option>'
+	else:
+		if sid == None:
+			while row != None:
+				menu+="<option value={sid}>{session_date} with {tutor}</option>".format(**row)
+				row = curs.fetchone()
+		else:
+			while row != None:
+				if '{sid}'.format(**row) == sid:
+					menu+="<option selected value={sid}>{session_date} with {tutor}</option>".format(**row)
+				else:
+					menu+="<option value={sid}>{session_date} with {tutor}</option>".format(**row)
+				row = curs.fetchone()
+	menu += "</select>"
+	return menu
+
+def logAttendance(sid):
+	conn = connect()
+	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
+	curs.execute('UPDATE session SET attendance = attendance+1 where sid = %s;', (sid,))
+	return "We have logged your attendance."
+
+def rateSession(sid, rating, tutee):
+	conn = connect()
+	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
+	curs.execute('INSERT INTO ratings (tutee, sid, rating_score) values (%s, %s, %s);', (tutee, sid, int(rating),))
+	return "You have successfully rated this session."
+
 def connect():
 	dsn = wendy_dsn.DSN
 	dsn['database'] = 'wli2_db'

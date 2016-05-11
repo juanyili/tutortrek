@@ -23,6 +23,30 @@ def addSession(fillers):
 		message = "<p>Message: Your works sessions are stored in the database.</p>"
 	return message
 
+def generateClass(cid=None):
+	conn = connect()
+	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
+	menu = "<select name ='cid'><option selected disabled>Class title</option>"
+	if cid == None:
+		curs.execute('SELECT cid, title FROM class;')
+		row = curs.fetchone()
+		while row != None:
+			menu+="<option value={cid}>{title}</option>".format(**row)
+			row = curs.fetchone()
+	else:
+		curs.execute('SELECT cid, title FROM class;')
+		row = curs.fetchone()
+		while row != None:
+			if '{cid}'.format(**row) == cid:
+				menu+="<option selected value={cid}>{title}</option>".format(**row)
+			else:
+				menu+="<option value={cid}>{title}</option>".format(**row)
+			row = curs.fetchone()
+	menu+="</select>"
+	return menu
+
+
+
 def connect():
 	dsn = wendy_dsn.DSN
 	dsn['database'] = 'wli2_db'

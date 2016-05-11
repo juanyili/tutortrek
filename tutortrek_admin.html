@@ -13,7 +13,7 @@
 
 <nav>
   <table id='menu'>
-   <tr><th><a href="tutortrek_main.html">Registration Page</a></th><th><a href="tutortrek_admin.html">Admin Page</a></th></tr>      
+   <tr><th><a href="tutortrek_main.cgi">Registration Page</a></th><th><a href="tutortrek_admin.cgi">Admin Page</a></th></tr>      
    </table>
 </nav>
 
@@ -22,6 +22,11 @@
 <p>If you are an administrator, please store information and search information through this portal. This enters data into the MySQL database called <strong>wli2_db</strong>. </p>
 
 <form method=post action="tutortrek_admin.cgi">
+  
+  <fieldset>
+    <legend>Message section</legend>
+    {No messages}
+  </fieldset>
 
   <fieldset>
     <legend>Add a tutor</legend>
@@ -37,19 +42,14 @@
 
   <fieldset>
     <legend>Look up a tutor</legend>
-    Tutor's username: <input type='text' name='tutor_id'>
+    Tutor name: {Tutor List}
   	<input type='submit' name='submit' value='LookupTutor'>
   </fieldset>
 
   <fieldset>
     <legend>Look up a class</legend>
-    Class ID: <input type='text' name='class_id'>
+    Class title: {Class List}
   	<input type='submit' name='submit' value='LookupClass'>
-  </fieldset>
-
-  <fieldset>
-    <legend>Message section</legend>
-    {No messages}
   </fieldset>
 
   <p>

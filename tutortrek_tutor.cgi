@@ -77,30 +77,35 @@ def main():
     fillers['No messages'] = 'Sorry, you are not logged in. Please log in.'
     tmpl = cgi_utils_sda.file_contents('tutortrek_main.html')
     page = tmpl.format(**fillers)
-    print page
+
   else:
     if sess_data['success'] == True and sess_data['role'] == 'Tutor': # only tutor can access this page
       fillers['username'] = sess_data['username']
-      if 'cid' in fs and 'date' in fs and 'time' in fs and 'duration' in fs:
-        fillers['cid'] = cgi.escape(fs['cid'].value)
-        fillers['date'] = cgi.escape(fs['date'].value)
-        fillers['time'] = cgi.escape(fs['time'].value)
-        fillers['duration'] = cgi.escape(fs['duration'].value)
-        message = tutortrek_tutor.addSession(fillers)
+      tutorname = sess_data['name']
+      if 'submit' in fs: # the tutee clicked "Log attendance data"
+        if 'cid' in fs and 'date' in fs and 'time' in fs and 'duration' in fs:
+          fillers['cid'] = cgi.escape(fs['cid'].value)
+          fillers['date'] = cgi.escape(fs['date'].value)
+          fillers['time'] = cgi.escape(fs['time'].value)
+          fillers['duration'] = cgi.escape(fs['duration'].value)
+          fillers['class menu'] = tutortrek_tutor.generateClass(fillers['cid'])
+          message = tutortrek_tutor.addSession(fillers)
+        else:
+          fillers['class menu'] = tutortrek_tutor.generateClass()
+          message = "Please fill out all the information." 
       else:
-        message = "Please fill out all the information."  
-
+        message = "Welcome to the Tutor page, dear "+ tutorname+ "!"
+        fillers['class menu'] = tutortrek_tutor.generateClass()
+        
       fillers['No messages'] = message
       tmpl = cgi_utils_sda.file_contents('tutortrek_tutor.html')
       page = tmpl.format(**fillers)
-      print page
-
     else:
       fillers['No messages'] = "Please log in first. Thank you!"
       tmpl = cgi_utils_sda.file_contents('tutortrek_main.html')
       page = tmpl.format(**fillers)
-      print page
-      
+
+  print page    
   save_session(my_sess_dir,sess_data)
 
 if __name__ == '__main__':

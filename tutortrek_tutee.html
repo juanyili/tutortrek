@@ -13,7 +13,7 @@
 
 <nav>
   <table id='menu'>
-   <tr><th><a href="tutortrek_main.html">Registration Page</a></th><th><a href="tutortrek_tutee.html">Tutee Page</a></th></tr>      
+   <tr><th><a href="tutortrek_main.cgi">Registration Page</a></th><th><a href="tutortrek_tutee.cgi">Tutee Page</a></th></tr>      
    </table>
 </nav>
 
@@ -24,6 +24,10 @@
   database called <strong>wli2_db</strong>. </p>
 
 <form method=post action="tutortrek_tutee.cgi">
+  <fieldset>
+    <legend>Message section</legend>
+    {No messages}
+  </fieldset>   
 
   <fieldset>
     <legend>Tutee's Attendance Info</legend>
@@ -34,12 +38,18 @@
     </table>
     <p>
     <input type='submit' name='submit' value='Log Attendance Data'>
-  </fieldset>
+  </fieldset> 
 
-  <fieldset>
-    <legend>Message section</legend>
-    {No messages}
-  </fieldset>    
+    <fieldset>
+    <legend>Tutee's Attendance Info</legend>
+    <table>
+    <tr><td>Search Class Title: </td><td><input type='text' name='search title'></td><td><input type='submit' name='submit' value='Search Class Title'></td></tr>
+    <tr><td>Classes Available: </td><td>{class menu}</td><td><input type='submit' name='submit' value='Choose Class'></td></tr>
+    <tr><td>Sessions Available: </td><td>{session menu}</td><td><input type='submit' name='submit' value='Attend'></td></tr>
+    <tr><td>Rating: </td><td>{rating menu}</td><td><input type='submit' name='submit' value='Rate this session'></td></tr>
+    </table>
+
+  </fieldset> 
 
   <p>
     <input type='reset' value='reset'>

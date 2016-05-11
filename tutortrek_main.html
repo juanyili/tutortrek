@@ -17,32 +17,32 @@
   database called <strong>wli2_db</strong>. </p>
 
 <form method=post action="tutortrek_main.cgi">
+  <fieldset>
+    <legend>Message section</legend>
+    {No messages}
+  </fieldset>
 
   <fieldset>
     <legend>Register as a tutee</legend>
     <p>Name: <input type='text' name='name'>
     <p>Username: <input type='text' name='username'>
-    <p>Password: <input type='text' name='password'>
-    <p>Retype your password: <input type='text' name='re-password'>
+    <p>Password: <input type='password' name='password'>
+    <p>Retype your password: <input type='password' name='re-password'>
     <p>
       <input type='submit' name='submit' value='Register'>
   </fieldset>
 
   <fieldset>
-    <legend>Select your page</legend>
+    <legend>Log In</legend>
     <p>Username: <input type='text' name='username'>
-    <p>Password: <input type='text' name='password'>
+    <p>Password: <input type='password' name='password'>
     <table>
-      <tr><td><label for="choice">Choice:</label></td><td><select name ="choice" id = "choice"><option value="Admin">Admin</option><option value="Tutor">Tutor</option><option value="Tutee">Tutee</option></select></td></tr>
+      <tr><td><label for="choice">Choice:</label></td><td><select name ="choice" id = "choice"><option selected disabled>Select your role here</option><option value="Tutee">Tutee</option><option value="Tutor">Tutor</option><option value="Admin">Admin</option></select></td></tr>
     </table>
     <p>
     <input type='submit' name='submit' value='Log In'>
   </fieldset>
-
-  <fieldset>
-    <legend>Message section</legend>
-    {No messages}
-  </fieldset> 
+ 
 
   <p>
     <input type='reset' value='reset'>
