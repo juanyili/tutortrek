@@ -19,23 +19,30 @@
 <form method=post action="tutortrek_main.cgi">
 
   <fieldset>
-    <legend>Register</legend>
+    <legend>Register as a tutee</legend>
     <p>Name: <input type='text' name='name'>
     <p>Username: <input type='text' name='username'>
+    <p>Password: <input type='text' name='password'>
+    <p>Retype your password: <input type='text' name='re-password'>
     <p>
       <input type='submit' name='submit' value='Register'>
-    <p>
-    {No messages}
   </fieldset>
 
   <fieldset>
     <legend>Select your page</legend>
+    <p>Username: <input type='text' name='username'>
+    <p>Password: <input type='text' name='password'>
     <table>
       <tr><td><label for="choice">Choice:</label></td><td><select name ="choice" id = "choice"><option value="Admin">Admin</option><option value="Tutor">Tutor</option><option value="Tutee">Tutee</option></select></td></tr>
     </table>
     <p>
-    <input type='submit' name='submit' value='Go To Page'>
+    <input type='submit' name='submit' value='Log In'>
   </fieldset>
+
+  <fieldset>
+    <legend>Message section</legend>
+    {No messages}
+  </fieldset> 
 
   <p>
     <input type='reset' value='reset'>

@@ -13,7 +13,7 @@
 
 <nav>
   <table id='menu'>
-   <tr><th><a href="tutortrek_main.html">Registration Page</a></th><th><a href="tutortrek_tutor.html">Tutor Page</a></th><th><a href="tutortrek_tutee.html">Tutee Page</a></th><th><a href="tutortrek_admin.html">Admin Page</a></th></tr>      
+   <tr><th><a href="tutortrek_main.html">Registration Page</a></th><th><a href="tutortrek_admin.html">Admin Page</a></th></tr>      
    </table>
 </nav>
 
@@ -22,31 +22,22 @@
 <p>If you are an administrator, please store information and search information through this portal. This enters data into the MySQL database called <strong>wli2_db</strong>. </p>
 
 <form method=post action="tutortrek_admin.cgi">
-  <fieldset>
-    <legend>Log In As An Admin</legend>
-    <table>
-      <tr><td><label for="uid">(i) Admin's ID:</label></td><td><input type="text" name="uid" id="uid"></td></tr>
-      <tr><td><label for="name">(n) Admin Name:</label></td><td><input type="text" name="name" id="name"></td></tr>
-    </table>
-    <p><input type='submit' name='submit' value='Log In'>
-  </fieldset>
-
 
   <fieldset>
     <legend>Add a tutor</legend>
     <table>
-    <tr><th>&nbsp;</th><th>Tutor ID</th><th>Class ID</th><th>Class Name</th></tr>
-    <tr><td>Example: </td><td>1</td><td>101</td><td>"Physics Intro"</td></tr>
-    <tr><td>0</td><td><input type='text' name='tid0'></td><td><input type='text' name='cid0'></td><td><input type='text' name='cname0'></td></tr>
-    <tr><td>1</td><td><input type='text' name='tid1'></td><td><input type='text' name='cid1'></td><td><input type='text' name='cname1'></td></tr>
-    <tr><td>2</td><td><input type='text' name='tid2'></td><td><input type='text' name='cid2'></td><td><input type='text' name='cname2'></td></tr>
+    <tr><th>&nbsp;</th><th>Tutor username</th><th>Class ID</th><th>Class Name</th></tr>
+    <tr><td>Example: </td><td>ehowey</td><td>101</td><td>"Physics Intro"</td></tr>
+    <tr><td>1</td><td><input type='text' name='tid0'></td><td><input type='text' name='cid0'></td><td><input type='text' name='cname0'></td></tr>
+    <tr><td>2</td><td><input type='text' name='tid1'></td><td><input type='text' name='cid1'></td><td><input type='text' name='cname1'></td></tr>
+    <tr><td>3</td><td><input type='text' name='tid2'></td><td><input type='text' name='cid2'></td><td><input type='text' name='cname2'></td></tr>
     </table>
     <input type='submit' name='submit' value='StoreInfo'>
   </fieldset> 
 
   <fieldset>
     <legend>Look up a tutor</legend>
-    Tutor ID: <input type='text' name='tutor_id'>
+    Tutor's username: <input type='text' name='tutor_id'>
   	<input type='submit' name='submit' value='LookupTutor'>
   </fieldset>
 

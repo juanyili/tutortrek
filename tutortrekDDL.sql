@@ -1,4 +1,4 @@
-# CS304 P2 Tutor Trek DDL
+# CS304 Tutor Trek DDL
 # Author: Wanyi Li & Emma Howey
 
 drop table if exists people;
@@ -11,7 +11,6 @@ drop table if exists session;
 drop table if exists ratings;
 
 create table people (
-    uid int auto_increment,
     name varchar(50),
 	username varchar(20),
     password char(15),
@@ -31,17 +30,17 @@ create table session(
     cid int,
     session_date date,
     length FLOAT,
-    tutor_id int,
+    tutor varchar(20),
     attendance int,
-    foreign key (cid) references class.class_id,
-    foreign key (tutor_id) references people.uid
+    foreign key (cid) references class.cid,
+    foreign key (tutor) references people.username
     );
 
 create table ratings(
-    tutee_id int,
+    tutee varchar(20),
     sid int,
     rating_score enum ('1', '2', '3'),
-    primary key (tutee_id, sid),
+    primary key (tutee, sid),
     foreign key (sid) references session.sid,
-    foreign key (tutee_id) references people.uid
+    foreign key (tutee) references people.username
     );
