@@ -9,6 +9,7 @@ import cgi
 import cgitb; cgitb.enable()
 import cgi_utils_sda
 import tutortrek_main
+import tutortrek_utils
 
 import Cookie
 import pickle
@@ -16,58 +17,11 @@ import cgi_utils_sda
  
 PY_CGI_SESS_ID='PY_CGI_SESS_ID'   # a constant, the name of the cookie
 
-def session_id():
-  '''Intended to mimic the behavior of the PHP function of this name'''
-  sesscookie = cgi_utils_sda.getCookieFromRequest(PY_CGI_SESS_ID)
-  if sesscookie == None:
-    sessid = cgi_utils_sda.unique_id()
-    if sessid == None:
-      print("I give up; couldn't create a session. No session id")
-      return
-  else:
-    sessid=sesscookie.value   # get value out of morsel
-  return sessid
-     
-def session_start(dir):
-  '''Intended to mimic the behavior of the PHP function of this name,
-except that instead of creating a "superglobal," this will just return
-a data structure that can be used in set_session_value and get_session_value.
-It takes as an argument the directory to read session data from.'''
-  sessid = session_id()
-  # Set a cookie and print that header
-  sesscookie = Cookie.SimpleCookie()
-  cgi_utils_sda.setCookie(sesscookie,PY_CGI_SESS_ID,sessid)
-  print(sesscookie)
-  # check to see if there's any session data
-  if not os.path.isfile(dir+sessid):
-    return {}
-  output = open(dir+sessid,'r+')
-  # print dir+sessid
-  # session already exists, so load saved data
-  # rb for read binary
-  input = open(dir+sessid,'r')
-  sess_data = pickle.load(input)
-  input.close()
-  if isinstance(sess_data,dict):
-    return sess_data
-  else:
-    raise Exception ("Possibly corrupted session data; not a dictionary: "
-                     +sess_data)
-    return
- 
-def save_session(dir,data):
-    '''Save the session data to the filesystem.'''
-    sessid = session_id()
-    output = open(dir+sessid,'w+')
-    pickle.dump(data,output,-1)
-    output.close()
-
 def main():
   my_sess_dir = '/students/wli2/public_html/sessions/'
   print 'Content-type: text/html'
-  sess_data = session_start(my_sess_dir)
+  sess_data = tutortrek_utils.session_start(PY_CGI_SESS_ID, my_sess_dir)
   print
-  sessid = session_id()
 
   fillers = {}
   fillers['scriptname'] = os.environ['SCRIPT_NAME'] if 'SCRIPT_NAME' in os.environ else ''
@@ -107,13 +61,13 @@ def main():
         fillers['No messages'] = message
         if success: 
           if fillers['choice'] == "Tutor":
-            page = cgi_utils_sda.file_contents('tutortrek_tutor.html')
+            page = cgi_utils_sda.file_contents('tutor_initial.html')
             #page = tmpl.format(**fillers)
           if fillers['choice'] == "Admin":
-            page = cgi_utils_sda.file_contents('tutortrek_admin.html')
+            page = cgi_utils_sda.file_contents('admin_initial.html')
             #page = tmpl.format(**fillers)
           if fillers['choice'] == "Tutee":
-            page = cgi_utils_sda.file_contents('tutortrek_tutee.html')
+            page = cgi_utils_sda.file_contents('tutee_initial.html')
             #page = tmpl.format(**fillers)
         else:
           fillers['No messages'] = message
@@ -125,7 +79,7 @@ def main():
         page = tmpl.format(**fillers)
 
   print page
-  save_session(my_sess_dir,sess_data)
+  tutortrek_utils.save_session(PY_CGI_SESS_ID, my_sess_dir,sess_data)
 
 if __name__ == '__main__':
   main()

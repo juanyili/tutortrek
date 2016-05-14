@@ -2,14 +2,28 @@
 
 # CS304 Final Project
 # Wanyi Li
+
+############################################
+# This is a module that provides helper methods 
+# for the administrator page of tutortrek.
+############################################
+
 import cgi
 import cgitb; cgitb.enable()
 import MySQLdb
 import dbconn
 import wendy_dsn
+import tutortrek_utils
 
+############################################
+# This method add a list of tutors and classes.
+# This adds class IDs and their titles into the
+# system and that means this class offers tutoring.
+# Administrator can change a registered user (tutee)
+# to be a tutor by entering their username.
+############################################
 def addTutor(fillers, tutor_list):
-	conn = connect()
+	conn = tutortrek_utils.connect()
 	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
 	message = "<p>no message."
 	for i in range(len(tutor_list)):
@@ -28,8 +42,12 @@ def addTutor(fillers, tutor_list):
 				message += "<p>Message: The tutor and class information is added.</p>"
 	return message
 
-def searchTutor(fillers):
-	conn = connect()
+############################################
+# This methods returns the tutoring session information
+# about a tutor that the administrator has selected.
+############################################
+def lookUpTutor(fillers):
+	conn = tutortrek_utils.connect()
 	curs = conn.cursor(MySQLdb.cursors.DictCursor)
 	tid = fillers['tutor_id']
 	curs.execute("SELECT username, name, role from people where username = %s;", (tid,))
@@ -49,8 +67,13 @@ def searchTutor(fillers):
 			message+=''
 	return message
 
-def searchClass(fillers):
-	conn = connect()
+
+############################################
+# This methods returns the tutoring session info 
+# about a class that the admin has selected.
+############################################
+def lookUpClass(fillers):
+	conn = tutortrek_utils.connect()
 	curs = conn.cursor(MySQLdb.cursors.DictCursor)
 	cid = fillers['class_id']
 	curs.execute("SELECT cid, title from class where cid = %s", (cid,))
@@ -67,57 +90,3 @@ def searchClass(fillers):
 	else:
 		message = '<p>The class you are looking for does not exist. Please check again!'
 	return message
-
-def allTutor(chosen=None):
-	conn = connect()
-	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
-	menu = "<select name ='tutor_id'><option selected disabled>Tutors List</option>"
-	if chosen == None:
-		curs.execute('SELECT username, name FROM people where role = "Tutor";')
-		row = curs.fetchone()
-		while row != None:
-			menu+="<option value={username}>{name}</option>".format(**row)
-			row = curs.fetchone()
-	else:
-		curs.execute('SELECT username, name FROM people where role = "Tutor";')
-		row = curs.fetchone()
-		while row != None:
-			if '{username}'.format(**row) == chosen:
-				menu+="<option selected value={username}>{name}</option>".format(**row)
-			else:
-				menu+="<option value={username}>{name}</option>".format(**row)
-			row = curs.fetchone()
-	menu+="</select>"
-	return menu
-
-def allClass(chosen=None):
-	conn = connect()
-	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
-	menu = "<select name ='class_id'><option selected disabled>Class List</option>"
-	if chosen == None:
-		curs.execute('SELECT cid, title FROM class;')
-		row = curs.fetchone()
-		while row != None:
-			menu+="<option value={cid}>{title}</option>".format(**row)
-			row = curs.fetchone()
-	else:
-		curs.execute('SELECT cid, title FROM class;')
-		row = curs.fetchone()
-		while row != None:
-			if '{cid}'.format(**row) == chosen:
-				menu+="<option selected value={cid}>{title}</option>".format(**row)
-			else:
-				menu+="<option value={cid}>{title}</option>".format(**row)
-			row = curs.fetchone()
-	menu+="</select>"
-	return menu
-
-
-def connect():
-	dsn = wendy_dsn.DSN
-	dsn['database'] = 'wli2_db'
-	conn = dbconn.connect(dsn)
-	return conn
-
-if __name__ == '__main__':
-	print main()

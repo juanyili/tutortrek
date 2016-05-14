@@ -1,6 +1,6 @@
 <!--TutorTrek-->
 <!--CS304 Final Project Emma Howey & Wanyi Li -->
-<!--This is the template for the admin page of tutortrek. -->
+<!--This is the initial admin page of tutortrek. -->
 
 <!DOCTYPE HTML PUBLIC>
 <HTML lang="en">
@@ -27,7 +27,7 @@
   
   <fieldset>
     <legend>Message section</legend>
-    {No messages}
+    You have no messages yet.
   </fieldset>
 
   <fieldset>
@@ -45,7 +45,7 @@
   <fieldset>
     <legend>Look up a tutor</legend>
     <p>Which tutor are you looking for? <input type='text' name='search tutor'><input type='submit' name='submit' value='SearchTutorButton'>
-    <p>Tutor name: {Tutor List}
+    <p>Tutor name: <select name ="tutor menu"><option selected disabled>You have not searched a tutor yet.</option></select>
   	<input type='submit' name='submit' value='LookupTutor'>
     <p> Note: A list of tutors with matching search queries will be returned in the dropdown menu above. If nothing matches, then all results will be returned. Leave the box empty and press "Search Tutor" button directly if you want a display of a list of all the tutors available in the database.
   </fieldset>
@@ -53,7 +53,7 @@
   <fieldset>
     <legend>Look up a class</legend>
     <p>Which class are you looking for? <input type='text' name='search class'><input type='submit' name='submit' value='SearchClassButton'>
-    <p>Class title: {Class List}
+    <p>Class title: <select name ="class menu"><option selected disabled>You have not searched a class yet.</option></select>
   	<input type='submit' name='submit' value='LookupClass'>
     <p> Note: A list of classes with matching search queries will be returned in the dropdown menu below. If nothing matches, then all results will be returned. Leave the box empty and press "Search Class" button directly if you want a display of a list of all the classes in the database.
   </fieldset>

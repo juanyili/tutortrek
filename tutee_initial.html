@@ -1,7 +1,6 @@
 <!--TutorTrek-->
 <!--CS304 Final Project Emma Howey & Wanyi Li -->
-<!--This is the template for the tutee page of tutortrek. -->
-
+<!--This is the initial tutee page of tutortrek. -->
 
 <!DOCTYPE HTML PUBLIC>
 <HTML lang="en">
@@ -16,26 +15,27 @@
 <h1>TutorTrek</h1>
 <h2>Innovative Tutoring Service Tracking System Brought To You By The Brilliant Emma Flower and Wanyi Giraffe</h2>
 
-
-{navigation}
+<nav>
+  <table id='menu'><tr><th><a href='tutortrek_main.cgi'>Registration Page</a></th><th><a href='tutortrek_tutee.cgi'>Tutee Page</a></th></tr></table>
+</nav>
 
 
 <h3>Tutee Page</h3>
 
-
 <form method=post action="tutortrek_tutee.cgi">
   <fieldset>
     <legend>Message section</legend>
-    {No messages}
+    You have no messages yet.
   </fieldset>   
 
   <fieldset>
     <legend>Tutee's Attendance Info</legend>
     <table>
     <tr><td>Search Class Title: </td><td><input type='text' name='search title'></td><td><input type='submit' name='submit' value='Search Class Title'></td></tr>
-    <tr><td>Classes Available: </td><td>{class menu}</td><td><input type='submit' name='submit' value='Choose Class'></td></tr>
-    <tr><td>Sessions Available: </td><td>{session menu}</td><td><input type='submit' name='submit' value='Attend'></td></tr>
-    <tr><td>Rating: </td><td>{rating menu}</td><td><input type='submit' name='submit' value='Rate this session'></td></tr>
+    
+    <tr><td>Classes Available: </td><td><select name ="class menu"><option selected disabled>You have not searched a class yet.</option></select></td><td><input type='submit' name='submit' value='Choose Class'></td></tr>
+    <tr><td>Sessions Available: </td><td><select name ="session"><option selected disabled>You have not chosen a class yet</option></select></td><td><input type='submit' name='submit' value='Attend'></td></tr>
+    <tr><td>Rating: </td><td><select name ="rating"><option selected disabled>You have not chosen a session yet</option></select></td><td><input type='submit' name='submit' value='Rate this session'></td></tr>
     </table>
 
   </fieldset> 

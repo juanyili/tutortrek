@@ -1,6 +1,6 @@
 <!--TutorTrek-->
 <!--CS304 Final Project Emma Howey & Wanyi Li -->
-<!--This is the template for the tutor page of tutortrek. -->
+<!--This is the initial tutor page of tutortrek. -->
 
 <!DOCTYPE HTML PUBLIC>
 <HTML lang="en">
@@ -16,16 +16,19 @@
 <h2>Innovative Tutoring Service Tracking System Brought To You By The Brilliant Emma Flower and Wanyi Giraffe</h2>
 
 
-{navigation}
+<nav>
+  <table id='menu'>
+    <tr><th><a href='tutortrek_main.html'>Registration Page</a></th><th><a href='tutortrek_tutor.cgi'>Tutor Page</a></th><th><a href='tutortrek_tutee.cgi'>Tutee Page</a></th></tr>
+  </table>
+</nav>
 
 
 <h3>Tutor Page</h3>
 
-
 <form method=post action="tutortrek_tutor.cgi">
   <fieldset>
     <legend>Message section</legend>
-    {No messages}
+    You have no messages yet.
   </fieldset> 
 
   <fieldset>
@@ -36,7 +39,7 @@
     <table>
     <tr><th>&nbsp;</th><th>Class ID</th><th>Date</th><th>Starting Time </th><th>Duration (hr)</th></tr>
     <tr><td>Example: </td><td>'Physics Intro'</td><td>2016-04-01</td><td>05:00 pm</td><td>1</td></tr>
-    <tr><td>Input:</td><td>{class menu}</td><td><input type='date' name='date'></td><td><input type='time' name='time'></td><td><input type='text' name='duration'></td></tr>
+    <tr><td>Input:</td><td><select name ="class menu"><option selected disabled>You have not searched a class yet.</option></select></td><td><input type='date' name='date'></td><td><input type='time' name='time'></td><td><input type='text' name='duration'></td></tr>
     </table>
     <p>
       <input type='submit' name='submit' value='Log Work Data'>
