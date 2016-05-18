@@ -36,13 +36,13 @@ def main():
       if "name" not in fs or "password" not in fs or "username" not in fs or "password" not in fs:
         message = "<p> Message: Please fill out all the information for registration."
       else:
-        fillers['name'] = cgi.escape(fs["name"].value)
-        fillers['username'] = cgi.escape(fs["username"].value)
+        fillers['name'] = cgi.escape(fs.getfirst('name'))
+        fillers['username'] = cgi.escape(fs.getfirst('username'))
         sess_data['username'] = fillers['username']
-        if cgi.escape(fs["password"].value) != cgi.escape(fs["re-password"].value):
+        if cgi.escape(fs["password"].value) != cgi.escape(fs.getfirst("re-password")):
           message = "<p> Message: Please retype your password!"
         else:
-          message = tutortrek_main.register(fillers, cgi.escape(fs["password"].value))
+          message = tutortrek_main.register(fillers, cgi.escape(fs.getfirst('password')))
 
       fillers['No messages'] = message
       tmpl = cgi_utils_sda.file_contents('tutortrek_main.html')
@@ -50,11 +50,11 @@ def main():
 
     else:  # if the user clicks 'Log In':
       if 'username' in fs and 'choice' in fs:
-        fillers['username'] = cgi.escape(fs['username'].value)
+        fillers['username'] = cgi.escape(fs.getfirst('username'))
         sess_data['username'] = fillers['username']
-        fillers['choice'] = cgi.escape(fs["choice"].value)
+        fillers['choice'] = cgi.escape(fs.getfirst('choice'))
 
-        success, message, role, name = tutortrek_main.login(fillers['username'], cgi.escape(fs["password"].value), fillers['choice'])
+        success, message, role, name = tutortrek_main.login(fillers['username'], cgi.escape(fs.getfirst('password')), fillers['choice'])
         sess_data['success'] = success
         sess_data['role'] = role
         sess_data['name'] = name
@@ -62,13 +62,10 @@ def main():
         if success: 
           if fillers['choice'] == "Tutor":
             page = cgi_utils_sda.file_contents('tutor_initial.html')
-            #page = tmpl.format(**fillers)
           if fillers['choice'] == "Admin":
             page = cgi_utils_sda.file_contents('admin_initial.html')
-            #page = tmpl.format(**fillers)
           if fillers['choice'] == "Tutee":
             page = cgi_utils_sda.file_contents('tutee_initial.html')
-            #page = tmpl.format(**fillers)
         else:
           fillers['No messages'] = message
           tmpl = cgi_utils_sda.file_contents('tutortrek_main.html')

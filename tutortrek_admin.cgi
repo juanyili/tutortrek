@@ -50,17 +50,17 @@ def main():
           if keyword != None:
             fillers['Tutor List'] = tutortrek_utils.searchTutor(keyword)
         if submit == 'SearchClassButton':
-          keyword = fs.getfirst('search tutor')
+          keyword = fs.getfirst('search class')
           if keyword != None:
             fillers['Class List'] = tutortrek_utils.searchClass(keyword)
 
         if 'tutor_id' in fs and submit == 'LookupTutor':
-          fillers['tutor_id'] = fs['tutor_id'].value
+          fillers['tutor_id'] = fs.getfirst('tutor_id')
           fillers['Tutor List'] = tutortrek_utils.allTutor(fillers['tutor_id'])
           message = tutortrek_admin.lookUpTutor(fillers)
 
         if 'cid' in fs and submit == 'LookupClass':
-          fillers['class_id'] = fs['cid'].value
+          fillers['class_id'] = fs.getfirst('cid')
           fillers['Class List'] = tutortrek_utils.allClass(fillers['class_id'])
           message = tutortrek_admin.lookUpClass(fillers)
 
@@ -71,12 +71,12 @@ def main():
             cid = 'cid'+str(i)
             cname = 'cname'+str(i)
             if tid in fs:
-              fillers[tid] = cgi.escape(fs[tid].value)
+              fillers[tid] = cgi.escape(fs.getfirst(tid))
               tutor_list[i] = True
               if cid in fs and cname in fs:
-                fillers[tid] = cgi.escape(fs[tid].value)
-                fillers[cid] = cgi.escape(fs[cid].value)
-                fillers[cname] = cgi.escape(fs[cname].value)
+                fillers[tid] = cgi.escape(fs.getfirst(tid))
+                fillers[cid] = cgi.escape(fs.getfirst(cid))
+                fillers[cname] = cgi.escape(fs.getfirst(cname))
           message = tutortrek_admin.addTutor(fillers, tutor_list)
 
       fillers['No messages'] = message

@@ -51,36 +51,36 @@ def main():
       
       if 'submit' in fs:
         message = "Please fill out all the information."
-        submit = fs['submit'].value
+        submit = fs.getfirst('submit')
 
         if submit == "Search Class Title" and 'search title' in fs:
-          fillers['class menu'] = tutortrek_utils.searchClass(cgi.escape(fs['search title'].value))
+          fillers['class menu'] = tutortrek_utils.searchClass(cgi.escape(fs.getfirst('search title')))
           fillers['rating menu'] = '<select name ="rating"><option selected disabled>You have not chosen a session yet</option></select>'
           fillers['session menu'] = '<select name ="session"><option selected disabled>You have not chosen a class yet</option></select>'
 
         if submit == "Choose Class" and 'cid' in fs:
-          fillers['session menu'] = tutortrek_tutee.generateSession(fs['cid'].value)
+          fillers['session menu'] = tutortrek_tutee.generateSession(fs.getfirst('cid'))
           fillers['rating menu'] = '<select name ="rating"><option selected disabled>You have not chosen a session yet</option></select>'
-          fillers['class menu'] = tutortrek_utils.allClass(fs['cid'].value)
+          fillers['class menu'] = tutortrek_utils.allClass(fs.getfirst('cid'))
 
         if submit == 'Attend' and 'sid' in fs and 'cid' in fs:
-          fillers['class menu'] = tutortrek_utils.allClass(fs['cid'].value)
-          fillers['session menu'] = tutortrek_tutee.generateSession(fs['cid'].value, fs['sid'].value)
+          fillers['class menu'] = tutortrek_utils.allClass(fs.getfirst('cid'))
+          fillers['session menu'] = tutortrek_tutee.generateSession(fs.getfirst('cid'), fs.getfirst('sid'))
           fillers['rating menu'] = '<select name ="rating"><option value="3">Great!</option><option value="2">Okay</option><option value="1">Bad</option></select>'
-          message += tutortrek_tutee.logAttendance(fs['sid'].value)
+          message += tutortrek_tutee.logAttendance(fs.getfirst('sid'))
 
         if submit == 'Rate this session' and 'sid' in fs and 'cid' in fs and 'rating' in fs:
           rating = fs['rating'].value
           sid = fs['sid'].value
-          fillers['class menu'] = tutortrek_utils.allClass(fs['cid'].value)
-          fillers['session menu'] = tutortrek_tutee.generateSession(fs['cid'].value, fs['sid'].value)
+          fillers['class menu'] = tutortrek_utils.allClass(fs.getfirst('cid'))
+          fillers['session menu'] = tutortrek_tutee.generateSession(fs.getfirst('cid'), fs.getfirst('sid'))
           if 'rating' == 3:
             fillers['rating menu'] = '<select name ="rating"><option selected value="3">Great!</option><option value="2">Okay</option><option value="1">Bad</option></select>'
           if 'rating' == 2:
             fillers['rating menu'] = '<select name ="rating"><option value="3">Great!</option><option selected value="2">Okay</option><option value="1">Bad</option></select>'
           if 'rating' == 1:
             fillers['rating menu'] = '<select name ="rating"><option value="3">Great!</option><option value="2">Okay</option><option selected value="1">Bad</option></select>'
-          message += tutortrek_tutee.rateSession(fs['sid'].value, fs['rating'].value, sess_data['username'])
+          message += tutortrek_tutee.rateSession(fs.getfirst('sid'), fs.getfirst('rating'), sess_data['username'])
 
       fillers['No messages'] = message
       tmpl = cgi_utils_sda.file_contents('tutortrek_tutee.html')

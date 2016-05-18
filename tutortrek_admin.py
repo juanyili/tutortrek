@@ -25,7 +25,7 @@ import tutortrek_utils
 def addTutor(fillers, tutor_list):
 	conn = tutortrek_utils.connect()
 	curs = conn.cursor(MySQLdb.cursors.DictCursor) # results as Dictionaries
-	message = "<p>no message."
+	message = "<p>"
 	for i in range(len(tutor_list)):
 		if tutor_list[i] == True:
 			tid = 'tid'+str(i)
@@ -60,11 +60,26 @@ def lookUpTutor(fillers):
 		message = '<p>This tutor is {name}.\n'.format(**row)
 		curs.execute("SELECT sid, cid, session_date, length, attendance from session where tutor = %s;", (tid,))
 		row = curs.fetchone()
+		sessions = []
 		while row != None:
+			sessions.append('{sid}'.format(**row))
 			message += '<li>session {sid} for class {cid} was on {session_date} for {length} hours. {attendance} students came.'.format(**row)
 			row = curs.fetchone()
 		else:
 			message+=''
+
+		scores = []
+		for sid in sessions:
+			curs.execute("SELECT tutee, rating_score from ratings where sid = %s;", (sid,))
+			row = curs.fetchone()
+			while row!= None:
+				scores.append(int('{rating_score}'.format(**row)))
+				row = curs.fetchone()
+		if len(scores) == 0:
+			message += "<p> The tutor has not been rated by anyone."
+		else:
+			score = float(sum(scores))/len(scores)
+			message += "<p>The average rating of tutor is %d on a scale of 1 to 3."%score
 	return message
 
 
@@ -82,11 +97,27 @@ def lookUpClass(fillers):
 		message = 'Class {cid} is {title}.'.format(**row)
 		curs.execute("SELECT sid, cid, session_date, length, attendance from session where cid = %s;", (cid,))
 		row = curs.fetchone()
+		sessions = []
 		while row!=None:
+			sessions.append('{sid}'.format(**row))
 			message += '<li>session {sid} for class {cid} was on {session_date} for {length} hours. {attendance} students came.'.format(**row)
 			row = curs.fetchone()
 		else:
 			message += ''
+
+		scores = []
+		for sid in sessions:
+			curs.execute("SELECT tutee, rating_score from ratings where sid = %s;", (sid,))
+
+			row = curs.fetchone()
+			while row!= None:
+				scores.append(int('{rating_score}'.format(**row)))
+				row = curs.fetchone()
+		if len(scores) == 0:
+			message+="<p> The tutoring for this class has not been rated by anyone."
+		else:
+			score = float(sum(scores))/len(scores)
+			message+="<p>The average rating of tutoring for this class is %d on a scale of 1 to 3."%score
 	else:
 		message = '<p>The class you are looking for does not exist. Please check again!'
 	return message
